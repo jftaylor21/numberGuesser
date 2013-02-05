@@ -1,8 +1,14 @@
 TEMPLATE = subdirs
 
 SUBDIRS *= utilities \
-           code
+           engine \
+           cli \
+           qt
 
 utilities.file = 3rdparty/common-cpp/code/utilities.pro
 
-code.depends = utilities
+engine.depends = utilities
+
+cli.depends = engine
+
+qt.depends = engine
