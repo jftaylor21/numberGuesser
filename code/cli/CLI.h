@@ -7,9 +7,6 @@ public:
   CLI();
 
   int exec();
-
-private:
-  void mainmenu();
 };
 
 #endif
