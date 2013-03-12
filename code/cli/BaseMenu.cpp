@@ -1,6 +1,7 @@
 #include "BaseMenu.h"
 #include <utilities/utilities.h>
 #include <iostream>
+#include <limits>
 
 BaseMenu::Choice::Choice(const std::string &choicename, const Utilities::Callback0 &callback)
   : mChoicename(choicename),
@@ -37,6 +38,10 @@ void BaseMenu::display()
               <<"Please enter the number corresponding to your choice..."
               << std::endl;
     std::cin >> choice;
+
+    //clear errors and ignore any other data left in buffer
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
   mChoices[choice-1].mCallback();
 }
