@@ -7,8 +7,6 @@ class MainMenu : public BaseMenu
 {
 public:
   MainMenu();
-
-  void exit();
 };
 
 #endif

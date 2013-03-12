@@ -22,26 +22,33 @@ void BaseMenu::addChoice(const std::string &choicename, const Utilities::Callbac
 
 void BaseMenu::display()
 {
-  Utilities::clearscreen();
-
-  std::cout << mTitle << std::endl;
-  for(unsigned int i(0); i < mChoices.size(); ++i)
-  {
-    std::cout << i+1 << ". " << mChoices[i].mChoicename << std::endl;
-  }
-
-
   unsigned int choice(0);
+  bool whileonce(false);
   while (!choice || choice > mChoices.size())
   {
-    std::cout << std::endl
-              <<"Please enter the number corresponding to your choice..."
+    Utilities::clearscreen();
+
+    //display menu options
+    std::cout << mTitle << std::endl;
+    for(unsigned int i(0); i < mChoices.size(); ++i)
+    {
+      std::cout << i+1 << ". " << mChoices[i].mChoicename << std::endl;
+    }
+
+    //display any errors and prompt user for choice
+    std::cout << std::endl;
+    if (whileonce)
+    {
+      std::cout << "ERROR: Input out of range." << std::endl;
+    }
+    std::cout << "Please enter the number corresponding to your choice..."
               << std::endl;
     std::cin >> choice;
 
     //clear errors and ignore any other data left in buffer
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    whileonce = true;
   }
   mChoices[choice-1].mCallback();
 }

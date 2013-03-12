@@ -4,11 +4,6 @@
 MainMenu::MainMenu()
   : BaseMenu("Welcome to Number Guesser")
 {
-  Utilities::ObjectCallback0<MainMenu> callback(this, &MainMenu::exit);
+  Utilities::Callback0 callback(&Utilities::nop);
   addChoice("Exit", callback);
-}
-
-void MainMenu::exit()
-{
-  ::exit(0);
 }
