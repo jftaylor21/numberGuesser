@@ -3,15 +3,18 @@
 #include <iostream>
 #include <limits>
 
-BaseMenu::Choice::Choice(const std::string &choicename, const Utilities::Callback0 &callback)
+BaseMenu::Choice::Choice(const std::string &choicename,
+                         const Utilities::Callback0 &callback, std::string* value)
   : mChoicename(choicename),
-    mCallback(callback.clone())
+    mCallback(callback.clone()),
+    mValue(value)
 {
 }
 
 BaseMenu::Choice::Choice(const Choice &copy)
   : mChoicename(copy.mChoicename),
-    mCallback(copy.mCallback->clone())
+    mCallback(copy.mCallback->clone()),
+    mValue(copy.mValue)
 {
 }
 
@@ -28,6 +31,7 @@ BaseMenu::Choice& BaseMenu::Choice::operator=(const Choice& rhs)
     mChoicename = mChoicename;
     delete mCallback;
     mCallback = rhs.mCallback->clone();
+    mValue = rhs.mValue;
   }
   return *this;
 }
@@ -38,9 +42,10 @@ BaseMenu::BaseMenu(const std::string &title)
 {
 }
 
-void BaseMenu::addChoice(const std::string &choicename, const Utilities::Callback0 &callback)
+void BaseMenu::addChoice(const std::string &choicename,
+                         const Utilities::Callback0 &callback, std::string* value)
 {
-  Choice c(choicename, callback);
+  Choice c(choicename, callback, value);
   mChoices.push_back(c);
 }
 
@@ -71,7 +76,12 @@ void BaseMenu::display()
       std::cout << mTitle << std::endl;
       for(unsigned int i(0); i < mChoices.size(); ++i)
       {
-        std::cout << i+1 << ". " << mChoices[i].mChoicename << std::endl;
+        std::cout << i+1 << ". " << mChoices[i].mChoicename;
+        if (mChoices[i].mValue)
+        {
+          std::cout << ": " << *mChoices[i].mValue;
+        }
+        std::cout << std::endl;
       }
       std::cout << mChoices.size()+1 << ". " << mExit;
 
