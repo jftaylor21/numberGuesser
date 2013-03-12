@@ -5,12 +5,16 @@ LIBS *= -L$$PWD/../3rdparty/common-cpp/lib \
 
 HEADERS *= $$PWD/CLI.h \
            $$PWD/BaseMenu.h \
-           $$PWD/MainMenu.h
+           $$PWD/MainMenu.h \
+           $$PWD/JoinGameMenu.h \
+           $$PWD/CreateGameMenu.h
 
 SOURCES *= $$PWD/CLI.cpp \
            $$PWD/main.cpp \
            $$PWD/BaseMenu.cpp \
-           $$PWD/MainMenu.cpp
+           $$PWD/MainMenu.cpp \
+           $$PWD/JoinGameMenu.cpp \
+           $$PWD/CreateGameMenu.cpp
 
 CONFIG -= qt
 CONFIG *= console

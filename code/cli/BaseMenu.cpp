@@ -5,12 +5,36 @@
 
 BaseMenu::Choice::Choice(const std::string &choicename, const Utilities::Callback0 &callback)
   : mChoicename(choicename),
-    mCallback(callback)
+    mCallback(callback.clone())
 {
 }
 
+BaseMenu::Choice::Choice(const Choice &copy)
+  : mChoicename(copy.mChoicename),
+    mCallback(copy.mCallback->clone())
+{
+}
+
+BaseMenu::Choice::~Choice()
+{
+  delete mCallback;
+  mCallback = 0;
+}
+
+BaseMenu::Choice& BaseMenu::Choice::operator=(const Choice& rhs)
+{
+  if (this != &rhs)
+  {
+    mChoicename = mChoicename;
+    delete mCallback;
+    mCallback = rhs.mCallback->clone();
+  }
+  return *this;
+}
+
 BaseMenu::BaseMenu(const std::string &title)
-  : mTitle(title)
+  : mTitle(title),
+    mExit("Exit")
 {
 }
 
@@ -20,35 +44,60 @@ void BaseMenu::addChoice(const std::string &choicename, const Utilities::Callbac
   mChoices.push_back(c);
 }
 
+void BaseMenu::addChoice(BaseMenu &menu)
+{
+  addChoice(menu.title(), Utilities::ObjectCallback0<BaseMenu>(&menu, &BaseMenu::display));
+}
+
+void BaseMenu::setExitString(const std::string &str)
+{
+  mExit = str;
+}
+
 void BaseMenu::display()
 {
+  //keep looping menu until exit choice is selected
   unsigned int choice(0);
-  bool whileonce(false);
-  while (!choice || choice > mChoices.size())
+  while (choice != mChoices.size()+1)
   {
-    Utilities::clearscreen();
-
-    //display menu options
-    std::cout << mTitle << std::endl;
-    for(unsigned int i(0); i < mChoices.size(); ++i)
+    //keep looping menu until valid choice is selected
+    choice = 0;
+    bool whileonce(false);
+    while (!choice || choice > mChoices.size()+1)
     {
-      std::cout << i+1 << ". " << mChoices[i].mChoicename << std::endl;
-    }
+      Utilities::clearscreen();
 
-    //display any errors and prompt user for choice
-    std::cout << std::endl;
-    if (whileonce)
+      //display menu options
+      std::cout << mTitle << std::endl;
+      for(unsigned int i(0); i < mChoices.size(); ++i)
+      {
+        std::cout << i+1 << ". " << mChoices[i].mChoicename << std::endl;
+      }
+      std::cout << mChoices.size()+1 << ". " << mExit;
+
+      //display any errors and prompt user for choice
+      std::cout << std::endl;
+      if (whileonce)
+      {
+        std::cout << "ERROR: Input out of range." << std::endl;
+      }
+      std::cout << "Please enter the number corresponding to your choice..."
+                << std::endl;
+      std::cin >> choice;
+
+      //clear errors and ignore any other data left in buffer
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      whileonce = true;
+    }
+    if (choice-1 < mChoices.size())
     {
-      std::cout << "ERROR: Input out of range." << std::endl;
+      (*mChoices[choice-1].mCallback)();
     }
-    std::cout << "Please enter the number corresponding to your choice..."
-              << std::endl;
-    std::cin >> choice;
-
-    //clear errors and ignore any other data left in buffer
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    whileonce = true;
   }
-  mChoices[choice-1].mCallback();
+}
+
+std::string BaseMenu::title() const
+{
+  return mTitle;
 }

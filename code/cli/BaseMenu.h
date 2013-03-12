@@ -11,20 +11,27 @@ public:
   BaseMenu(const std::string& title);
 
   void addChoice(const std::string& choicename, const Utilities::Callback0& callback);
+  void addChoice(BaseMenu& menu);
+  void setExitString(const std::string& str);
+  std::string title() const;
   void display();
 
 private:
   struct Choice
   {
     Choice(const std::string& choicename, const Utilities::Callback0& callback);
+    Choice(const Choice& copy);
+    ~Choice();
+    Choice& operator=(const Choice& rhs);
 
     std::string mChoicename;
-    Utilities::Callback0 mCallback;
+    Utilities::Callback0* mCallback;
   };
 
   typedef std::vector<Choice> ChoiceList;
 
   std::string mTitle;
+  std::string mExit;
   ChoiceList mChoices;
 };
 
