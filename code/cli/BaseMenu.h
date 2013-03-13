@@ -17,6 +17,9 @@ public:
   std::string title() const;
   void display();
 
+protected:
+  unsigned int inputChoice(const std::string& text);
+
 private:
   struct Choice
   {
@@ -30,7 +33,6 @@ private:
     Utilities::Callback0* mCallback;
     std::string* mValue;
   };
-
   typedef std::vector<Choice> ChoiceList;
 
   std::string mTitle;
