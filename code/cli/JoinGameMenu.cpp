@@ -1,5 +1,6 @@
 #include "JoinGameMenu.h"
 #include <utilities/utilities.h>
+#include <utilities/utilities-socket.h>
 
 JoinGameMenu::JoinGameMenu()
   : BaseMenu("Join Game"),
@@ -13,8 +14,19 @@ JoinGameMenu::JoinGameMenu()
 
 void JoinGameMenu::grabIP()
 {
-  std::cout << "Please enter IP address..." << std::endl;
-  std::cin >> mIP;
+  std::string ip(mIP);
+  do
+  {
+    std::cout << std::endl;
+    if (!Utilities::Socket::validateIP(ip))
+    {
+      std::cout << "ERROR: IP " << ip << " not valid." << std::endl;
+    }
+    std::cout << "Please enter IP Address (x.x.x.x)..." << std::endl;
+    std::cin >> ip;
+  } while (!Utilities::Socket::validateIP(ip));
+
+  mIP = ip;
 }
 
 void JoinGameMenu::grabPort()
