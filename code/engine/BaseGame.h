@@ -1,10 +1,14 @@
 #ifndef BASEGAME_H
 #define BASEGAME_H
 
+#include <string>
+
 class BaseGame
 {
 public:
   BaseGame();
+
+  bool initialize(const std::string& ip, unsigned int port);
 
   bool setMinimum(int value);
   int minimum() const;
