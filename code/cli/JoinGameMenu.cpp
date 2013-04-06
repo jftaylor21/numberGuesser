@@ -1,5 +1,5 @@
 #include "JoinGameMenu.h"
-#include <utilities/utilities-conversion.h>
+#include <utilities/utilities-string.h>
 #include <utilities/utilities-socket.h>
 
 JoinGameMenu::JoinGameMenu()
