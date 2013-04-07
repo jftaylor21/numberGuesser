@@ -1,12 +1,12 @@
-#ifndef BASEGAME_H
-#define BASEGAME_H
+#ifndef GAMESERVER_H
+#define GAMESERVER_H
 
 #include <string>
 
-class BaseGame
+class GameServer
 {
 public:
-  BaseGame();
+  GameServer();
 
   bool initialize(const std::string& ip, unsigned int port);
 

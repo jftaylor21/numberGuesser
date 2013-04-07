@@ -1,12 +1,12 @@
-#ifndef BASEPLAYER_H
-#define BASEPLAYER_H
+#ifndef GAMECLIENT_H
+#define GAMECLIENT_H
 
 #include <string>
 
-class BasePlayer
+class GameClient
 {
 public:
-  BasePlayer();
+  GameClient();
 
   bool join(const std::string& ip, unsigned int port);
 };

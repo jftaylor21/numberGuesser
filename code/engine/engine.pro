@@ -1,10 +1,10 @@
 TEMPLATE = lib
 
-HEADERS *= $$PWD/BaseGame.h \
-           $$PWD/BasePlayer.h
+HEADERS *= $$PWD/GameServer.h \
+           $$PWD/GameClient.h
 
-SOURCES *= $$PWD/BaseGame.cpp \
-           $$PWD/BasePlayer.cpp
+SOURCES *= $$PWD/GameServer.cpp \
+           $$PWD/GameClient.cpp
 
 CONFIG -= qt
 

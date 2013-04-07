@@ -2,7 +2,7 @@
 #define JOINGAMEMENU_H
 
 #include <utilities/utilities-cli-menu.h>
-#include <engine/BasePlayer.h>
+#include <engine/GameClient.h>
 
 class JoinGameMenu : public Utilities::CLIMenu
 {
@@ -13,7 +13,7 @@ public:
   void grabPort();
 
 private:
-  BasePlayer mPlayer;
+  GameClient mClient;
   std::string mIP;
   std::string mPort;
 };

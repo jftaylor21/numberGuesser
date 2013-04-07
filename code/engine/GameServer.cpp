@@ -1,13 +1,13 @@
-#include "BaseGame.h"
+#include "GameServer.h"
 
-BaseGame::BaseGame()
+GameServer::GameServer()
   : mMinimum(0),
     mMaximum(100),
     mNumGuesses(0)
 {
 }
 
-bool BaseGame::setMinimum(int value)
+bool GameServer::setMinimum(int value)
 {
   bool ret(false);
   if (value < mMaximum)
@@ -18,12 +18,12 @@ bool BaseGame::setMinimum(int value)
   return ret;
 }
 
-int BaseGame::minimum() const
+int GameServer::minimum() const
 {
   return mMinimum;
 }
 
-bool BaseGame::setMaximum(int value)
+bool GameServer::setMaximum(int value)
 {
   bool ret(false);
   if (value > mMinimum)
@@ -34,18 +34,18 @@ bool BaseGame::setMaximum(int value)
   return ret;
 }
 
-int BaseGame::maximum() const
+int GameServer::maximum() const
 {
   return mMaximum;
 }
 
-bool BaseGame::setNumGuesses(unsigned int numGuesses)
+bool GameServer::setNumGuesses(unsigned int numGuesses)
 {
   mNumGuesses = numGuesses;
   return true;
 }
 
-unsigned int BaseGame::numGuesses() const
+unsigned int GameServer::numGuesses() const
 {
   return mNumGuesses;
 }

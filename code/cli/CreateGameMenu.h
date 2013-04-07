@@ -2,8 +2,8 @@
 #define CREATEGAMEMENU_H
 
 #include <utilities/utilities-cli-menu.h>
-#include <engine/BaseGame.h>
-#include <engine/BasePlayer.h>
+#include <engine/GameServer.h>
+#include <engine/GameClient.h>
 
 class CreateGameMenu : public Utilities::CLIMenu
 {
@@ -15,8 +15,8 @@ public:
   void grabNumGuesses();
 
 private:
-  BaseGame mGame;
-  BasePlayer mPlayer;
+  GameServer mServer;
+  GameClient mClient;
   std::string mMinimum;
   std::string mMaximum;
   std::string mNumGuesses;
