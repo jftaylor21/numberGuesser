@@ -1,11 +1,11 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#include "BaseMenu.h"
+#include <utilities/utilities-cli-menu.h>
 #include "CreateGameMenu.h"
 #include "JoinGameMenu.h"
 
-class MainMenu : public BaseMenu
+class MainMenu : public Utilities::CLIMenu
 {
 public:
   MainMenu();

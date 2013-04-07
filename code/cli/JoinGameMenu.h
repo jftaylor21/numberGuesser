@@ -1,10 +1,10 @@
 #ifndef JOINGAMEMENU_H
 #define JOINGAMEMENU_H
 
-#include "BaseMenu.h"
+#include <utilities/utilities-cli-menu.h>
 #include <engine/BasePlayer.h>
 
-class JoinGameMenu : public BaseMenu
+class JoinGameMenu : public Utilities::CLIMenu
 {
 public:
   JoinGameMenu();

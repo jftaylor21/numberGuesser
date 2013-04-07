@@ -3,7 +3,7 @@
 #include <utilities/utilities-socket.h>
 
 JoinGameMenu::JoinGameMenu()
-  : BaseMenu("Join Game"),
+  : Utilities::CLIMenu("Join Game"),
     mIP("127.0.0.1"),
     mPort("54545")
 {

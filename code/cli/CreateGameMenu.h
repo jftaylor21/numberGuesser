@@ -1,11 +1,11 @@
 #ifndef CREATEGAMEMENU_H
 #define CREATEGAMEMENU_H
 
-#include "BaseMenu.h"
+#include <utilities/utilities-cli-menu.h>
 #include <engine/BaseGame.h>
 #include <engine/BasePlayer.h>
 
-class CreateGameMenu : public BaseMenu
+class CreateGameMenu : public Utilities::CLIMenu
 {
 public:
   CreateGameMenu();

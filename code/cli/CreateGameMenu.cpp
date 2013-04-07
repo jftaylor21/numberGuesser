@@ -2,7 +2,7 @@
 #include <utilities/utilities-string.h>
 
 CreateGameMenu::CreateGameMenu()
-  : BaseMenu("Create Game"),
+  : Utilities::CLIMenu("Create Game"),
     mMinimum(Utilities::toString(mGame.minimum())),
     mMaximum(Utilities::toString(mGame.maximum())),
     mNumGuesses(mGame.numGuesses()==0?"Infinite":Utilities::toString(mGame.numGuesses()))
