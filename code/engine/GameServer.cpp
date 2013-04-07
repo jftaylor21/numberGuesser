@@ -3,8 +3,14 @@
 GameServer::GameServer()
   : mMinimum(0),
     mMaximum(100),
-    mNumGuesses(0)
+    mNumGuesses(0),
+    mRPC(true)
 {
+}
+
+bool GameServer::initialize(const std::string &ip, unsigned int port)
+{
+  return mRPC.initialize(ip, port);
 }
 
 bool GameServer::setMinimum(int value)

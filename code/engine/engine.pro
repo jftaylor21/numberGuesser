@@ -9,4 +9,6 @@ SOURCES *= $$PWD/GameServer.cpp \
 CONFIG -= qt
 
 INSTALL_LIB_PATH = $$PWD/../
+
+include($$PWD/../3rdparty/common-cpp/common-cpp.pri)
 include($$PWD/../3rdparty/common-cpp/code/3rdparty/common-qmake/pri/installlib.pri)

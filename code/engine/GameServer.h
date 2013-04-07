@@ -2,6 +2,7 @@
 #define GAMESERVER_H
 
 #include <string>
+#include <utilities/utilities-stringrpc.h>
 
 class GameServer
 {
@@ -24,6 +25,7 @@ private:
   int mMinimum;
   int mMaximum;
   unsigned int mNumGuesses;
+  Utilities::StringRPC mRPC;
 };
 
 #endif
